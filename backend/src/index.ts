@@ -1,19 +1,43 @@
 import { Hono } from "hono";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
-import { sign } from "hono/jwt";
-import { use } from "hono/jsx";
+import { sign, verify } from "hono/jwt";
+import { use} from "hono/jsx";
 
-// const app = new Hono();
+//{
 
-
-// if don't want to write below code then simpply we can use @ts-ignore something like that we won't get any type eroor but for industry praactices we should use  below code -----
-const app = new Hono<{
+  // const app = new Hono();
+  // if don't want to write below code then simpply we can use @ts-ignore something like that we won't get any type eroor but for industry praactices we should use  below code -----
+//}
+  const app = new Hono<{
   Bindings: {
     DATABASE_URL: string,
     JWT_SECRET : string
   };
 }>();
+
+// try to implement middleware
+app.use('api/v1/blog' , async (c, next)=>{
+  const header  = c.req.header("authorization") || " "
+  //Bearer token => ["Brearer" ,"your jwtsnlkfkldsfkdskfjsfdsk"]
+  const token = header.split("") [1]
+  const response = await  verify (c.env.JWT_SECRET , token)
+  if(response.id){
+    next();
+  }else{
+    c.status(403)
+    c.json({error:"UnAuthroziated"})
+  }
+})
+  
+
+
+
+
+
+
+
+
 
 // ---------------signup logic-----------------------------------
 app.post("/api/v1/signup", async (c) => {
