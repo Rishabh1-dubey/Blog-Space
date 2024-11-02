@@ -18,7 +18,7 @@ model User {
   email    String  @unique
   password String
   name     String?
-  post     Post[]
+  posts     Post[]
 }
 
 model Post {
@@ -28,4 +28,5 @@ model Post {
   published Boolean @default(false)
   author    User    @relation(fields: [authorId], references: [id])
   authorId  String
+  thumbnail String
 }
