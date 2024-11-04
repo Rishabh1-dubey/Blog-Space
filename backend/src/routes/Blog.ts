@@ -9,7 +9,7 @@ export const blogRouter = new Hono<{
     JWT_SECRET: string;
   };
   Variables: {
-    userId: string;
+    jwtPayload: string;
   };
 }>();
 
@@ -26,8 +26,7 @@ blogRouter.use("/*", async (c, next) => {
     const response = await verify(token, c.env.JWT_SECRET);
 
     if (response) {
-      //@ts-ignore
-      c.set("userId", response.id);
+      c.set("jwtPayload", response.id);
       await next();
     } else {
       c.status(403);
@@ -46,7 +45,7 @@ blogRouter.use("/*", async (c, next) => {
 
 blogRouter.post("/", async (c) => {
   const body = await c.req.json();
-const authorId = c.get("userId")
+  const authorId = c.get("jwtPayload");
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
@@ -55,8 +54,8 @@ const authorId = c.get("userId")
     data: {
       title: body.title,
       content: body.content,
-      authorId: Number(authorId)
-    }
+      authorId: String(authorId)
+    },
   });
   return c.json({
     id: blog.id,
@@ -83,8 +82,20 @@ blogRouter.put("/", async (c) => {
   });
 });
 
+//add pagenation
+blogRouter.get("/bulk", async (c) => {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  const blogs = await prisma.post.findMany();
+  return c.json({
+    blogs,
+  });
+});
+
 blogRouter.get("/:id", async (c) => {
-  const body = await c.req.json();
+  const id =  c.req.param("id");
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
@@ -92,7 +103,7 @@ blogRouter.get("/:id", async (c) => {
   try {
     const blog = await prisma.post.findFirst({
       where: {
-        id: body.id,
+        id:id,
       },
     });
     return c.json({
@@ -104,15 +115,3 @@ blogRouter.get("/:id", async (c) => {
   }
 });
 
-//add pagenation
-blogRouter.get("/bulk", async (c) => {
-  const body = await c.req.json();
-  const prisma = new PrismaClient({
-    datasourceUrl: c.env.DATABASE_URL,
-  }).$extends(withAccelerate());
-
-  const blogs = await prisma.post.findMany();
-  return c.json({
-    blogs,
-  });
-});
