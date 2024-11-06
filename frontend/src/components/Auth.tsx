@@ -1,24 +1,98 @@
+import { ChangeEvent, useState } from "react";
+import { Link } from "react-router-dom";
+import { SignupType } from "@rishabh123/blog-space";
 
-import { Link } from "react-router-dom"
-
-export const Auth=()=>{
-
-    // const [logIN, setLogin] =useState()
-    return <div className=" w-screen grid  grid-cols-1 md:grid-cols-2">
-
-
-
-<div className="mt-20 h-[500px] border bg-red-50 ">
-
-<div className=" border border-red-400 m-14  h-[360px]">
-
-<div className=" text-center   ">
-    <h1 className="text-3xl font-semibold tracking-wide ">Create and account</h1>
-    <p className="mt-1">Already have an account  <Link className="text-slate-600 underline leading-loose" to='/signin'>Login</Link></p>
-</div>
-
-</div>
-</div>
-
+export const Auth = ({ type }: { type: "signup" | "signin" }) => {
+  const [postInputs, setpostInputs] = useState<SignupType>({
+    email: "",
+    password: "",
+    name: "",
+  });
+  return (
+    <div className=" w-screen grid  grid-cols-1 md:grid-cols-2">
+      <div className=" mt-32 sm:h-[500px]   ">
+        <div className="m-24   h-[360px] sm:w-[400px] lg:w-[400px]  mx-auto sm:mx-auto ">
+          <div className=" text-center pr-6   ">
+            <h1 className="text-3xl font-semibold tracking-wide ">
+              Create and Account
+            </h1>
+            <div className="mt-1  ">
+              {type === "signin"
+                ? "Don't Have an Account?"
+                : " Already have an account? "}
+              <Link
+                className="text-slate-600 underline   leading-loose pl-1 hover:text-blue-600 "
+                to={type === "signin" ? "/signUp" : "/signin "}
+              >
+                {type === "signin" ? "signup" : "signin"}
+              </Link>
+            </div>
+          </div>
+          {/* --------------------------- lablled input ---------------------- */}
+          <div className="mt-4">
+            {type === "signup" && (
+              <LabelledInput
+                label="Name"
+                placeholder="John"
+                onChange={(e) => {
+                  setpostInputs({ ...postInputs, name: e.target.value });
+                }}
+              />
+            )}
+            <LabelledInput
+              label="Email address"
+              placeholder="john.doe@company.com"
+              onChange={(e) => {
+                setpostInputs({ ...postInputs, email: e.target.value });
+              }}
+            />{" "}
+            <LabelledInput
+              label="Password"
+              type={"password"}
+              placeholder="•••••••••"
+              onChange={(e) => {
+                setpostInputs({ ...postInputs, password: e.target.value });
+              }}
+            />
+            <button
+              type="button"
+              className="w-full text-white bg-gray-800  focus:outline-none   font-medium rounded-lg text-sm px-5 py-2.5 me-2 mt-6 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+            >
+              {type === "signup" ? "Sign up" : "Sign in"}
+            </button>
+          </div>
+          {/* ------------------------------------------------------------------- */}
+        </div>
+      </div>
     </div>
+  );
+};
+
+interface labelledInputProps {
+  label: string;
+  placeholder: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  type?: string;
+}
+
+function LabelledInput({
+  label,
+  placeholder,
+  onChange,
+  type,
+}: labelledInputProps) {
+  return (
+    <div>
+      <label className="block mb-2 text-sm font-medium text-gray-900  pt-6 sm:pt-4 lg:pt-4">
+        {label}
+      </label>
+      <input
+        onChange={onChange}
+        type={type || "text"}
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder={placeholder}
+        required
+      />
+    </div>
+  );
 }

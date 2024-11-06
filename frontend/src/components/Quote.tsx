@@ -2,7 +2,7 @@ export const Quote = () => {
   return (
     <div className="bg-slate-200 h-screen  flex justify-center flex-col ">
       <div className="flex justify-center     ">
-        <div className="max-w-xl md:p-4 ">
+        <div className="max-w-xl sm:p-4 ">
           <div className="text-2xl font-semibold  ">
           “Just know, when you truly want success, you’ll never give up on it. No matter how bad the situation may get.” 
           </div>
