@@ -8,7 +8,7 @@ export const Signup = () => {
 
         {/* -------------------*/}
         <div>
-          <Auth />
+          <Auth type="signup"  />
         </div>
         {/* -------------- */}
 
