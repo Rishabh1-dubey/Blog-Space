@@ -7,3 +7,5 @@ main = "src/index.ts"
 DATABASE_URL =""
 
 JWT_SECRET=""
+
+
