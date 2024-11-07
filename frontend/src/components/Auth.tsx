@@ -1,13 +1,30 @@
 import { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SignupType } from "@rishabh123/blog-space";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
 
 export const Auth = ({ type }: { type: "signup" | "signin" }) => {
+  const navigate = useNavigate();
   const [postInputs, setpostInputs] = useState<SignupType>({
     email: "",
     password: "",
-    name: "",
+    name: ""
   });
+
+  async function sendRequest() {
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`, postInputs
+      );
+      const jwt = response.data;
+      localStorage.setItem("", jwt);
+      navigate("/blog");
+    } catch (error: any) {
+      console.error("Error:", error.response?.data || error.message);
+      alert("alert while logging");
+    }
+  }
   return (
     <div className=" w-screen grid  grid-cols-1 md:grid-cols-2">
       <div className=" mt-32 sm:h-[500px]   ">
@@ -56,6 +73,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
             />
             <button
               type="button"
+              onClick={sendRequest}
               className="w-full text-white bg-gray-800  focus:outline-none   font-medium rounded-lg text-sm px-5 py-2.5 me-2 mt-6 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
             >
               {type === "signup" ? "Sign up" : "Sign in"}
