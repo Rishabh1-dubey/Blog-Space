@@ -14,20 +14,21 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
 
   async function sendRequest() {
     try {
-      const response = await axios.post(
-        `${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`, postInputs
-      );
+      const response = await axios.post(`${BACKEND_URL}/api/v1/user/${type == "signup" ? "signup" : "signin"}`, postInputs,{
+          withCredentials: true,
+        }
+);
       const jwt = response.data;
-      localStorage.setItem("", jwt);
+      localStorage.setItem("token", jwt);
       navigate("/blog");
     } catch (error: any) {
-      console.error("Error:", error.response?.data || error.message);
+      console.error("Error:", error || error.message);
       alert("alert while logging");
     }
   }
   return (
     <div className=" w-screen grid  grid-cols-1 md:grid-cols-2">
-      <div className=" mt-32 sm:h-[500px]   ">
+      <div className=" mt-24 sm:h-[500px]   ">
         <div className="m-24   h-[360px] sm:w-[400px] lg:w-[400px]  mx-auto sm:mx-auto ">
           <div className=" text-center pr-6   ">
             <h1 className="text-3xl font-semibold tracking-wide ">
