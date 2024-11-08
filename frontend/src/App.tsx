@@ -5,6 +5,7 @@ import { Signup } from './Pages/Signup'
 
 import { Blog } from './Pages/Blog'
 import { Signin } from './Pages/SignIn'
+import Blogs from './Pages/Blogs'
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Route path='/signup' element={<Signup/>}/>
       <Route path='/signin' element={<Signin/>}/>
       <Route path='/blog/:id' element ={<Blog/>}/>
+      <Route path='/blogs' element={<Blogs/>}/>
      </Routes>
      
      
