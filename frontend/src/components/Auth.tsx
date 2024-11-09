@@ -6,6 +6,7 @@ import { BACKEND_URL } from "../config";
 
 export const Auth = ({ type }: { type: "signup" | "signin" }) => {
   const navigate = useNavigate();
+
   const [postInputs, setpostInputs] = useState<SignupType>({
     email: "",
     password: "",
@@ -15,9 +16,11 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
   async function sendRequest() {
     try {
       const response = await axios.post(`${BACKEND_URL}/api/v1/user/${type == "signup" ? "signup" : "signin"}`, postInputs);
-      const jwt = response.data;
+      const {jwt} = response.data;
       localStorage.setItem("token", jwt);
+      console.log(response.data)
       navigate("/blogs");
+      
     } catch (error: any) {
       console.error("Error:", error || error.message);
       alert("alert while logging");
@@ -37,7 +40,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
                 : " Already have an account? "}
               <Link
                 className="text-slate-600 underline   leading-loose pl-1 hover:text-blue-600 "
-                to={type === "signin" ? "/signUp" : "/signin "}
+                to={type === "signin" ? "/signup" : "/signin "}
               >
                 {type === "signin" ? "signup" : "signin"}
               </Link>
