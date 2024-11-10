@@ -24,3 +24,6 @@ export const ShimmerList: React.FC = () => {
     </div>
   );
 };
+
+
+//make shimmer effect
