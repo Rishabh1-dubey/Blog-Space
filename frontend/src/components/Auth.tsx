@@ -4,7 +4,13 @@ import { SignupType } from "@rishabh123/blog-space";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 
+
 export const Auth = ({ type }: { type: "signup" | "signin" }) => {
+
+
+  //alert logic ----
+
+
   const navigate = useNavigate();
 
   const [postInputs, setpostInputs] = useState<SignupType>({
@@ -24,6 +30,22 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
     } catch (error: any) {
       console.error("Error:", error || error.message);
       alert("alert while logging");
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
   }
   return (
