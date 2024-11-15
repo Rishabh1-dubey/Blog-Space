@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { SignupType } from "@rishabh123/blog-space";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import {  Bounce, toast } from 'react-toastify';
 
 
 export const Auth = ({ type }: { type: "signup" | "signin" }) => {
@@ -25,26 +26,32 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
       const {jwt} = response.data;
       localStorage.setItem("token", jwt);
       console.log(response.data)
+      toast.success('Welcome to blog-Space', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
       navigate("/blogs");
       
     } catch (error: any) {
       console.error("Error:", error || error.message);
-      alert("alert while logging");
-
-
-      
-
-
-
-
-
-
-
-
-
-
-
-
+      toast.error('Invalid Credentials', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
 
     }
   }
