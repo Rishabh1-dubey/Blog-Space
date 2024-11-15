@@ -17,7 +17,7 @@ const AppBar = () => {
           type="button"
           className="text-black  bg-orange-200    rounded-xl text-base px-6  text-center me-2   transition-all delay-100 hover:cursor-pointer shadow-xl"
         >
-          <Link to={"/sign"}>SignOut</Link>
+          <Link to={"/signin"}>SignOut</Link>
         </button>{" "}
         <button
           type="button"
