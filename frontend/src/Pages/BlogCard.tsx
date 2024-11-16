@@ -29,9 +29,9 @@ id,
       </div>
 
 
-      <div className=" text-xl  font-bold">{title}</div>
-      <div className=" font-extralight">{content.slice(0, 100) + "..."}</div>
-      <div className="font-thin pt-4">{`${Math.ceil(content.length / 100)} mint`}</div>
+      <div className=" text-xl  font-bold mt-2">{title}</div>
+      <div className=" font-extralight mt-1">{content.slice(0, 100) + "..."}</div>
+      <div className="font-thin pt-2">{`${Math.ceil(content.length / 100)} mint`}</div>
       
     </div>
 </Link>
