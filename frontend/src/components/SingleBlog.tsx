@@ -27,7 +27,7 @@ export const SingleBlog = ({ blog }: { blog: Blog }) => {
                 </div>
             </div>
             <div className="col-span-4 ">
-                <div className="text-slate-600 text-lg">
+                <div className="text-slate-600 text-lg ml-14">
                     Author
                 </div>
                 <div className="flex w-full">
@@ -39,7 +39,7 @@ export const SingleBlog = ({ blog }: { blog: Blog }) => {
                             {blog?.author.name || "Anonymous"}
                         </div>
                         <div className="pt-2 text-slat-500">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet quia qui illo debitis explicabo inventore nam veritatis autem sequi exercitationem.
+                        Author | Stoyteller | Student
                         </div>
                     </div>
                 </div>
