@@ -39,7 +39,7 @@ const Blogs = () => {
   if (loading) {
     return (
       <div>
-        {Array.from({ length: 6 }).map((e, index) => (
+        {Array.from({ length: 6 }).map((_, index) => (
           <Shimmer key={index} />
         ))}
       </div>
