@@ -20,6 +20,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
     name: ""
   });
 
+  console.log(postInputs)
   async function sendRequest() {
     try {
       const response = await axios.post(`${BACKEND_URL}/api/v1/user/${type == "signup" ? "signup" : "signin"}`, postInputs);
