@@ -12,6 +12,7 @@ export const userRouter = new Hono<{
   };
 }>();
 
+//<---------------signup logic-------------------
 userRouter.post("/signup", async (c) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
@@ -25,9 +26,9 @@ userRouter.post("/signup", async (c) => {
   }
   const user = await prisma.user.create({
     data: {
-      email: body.email,
-      password: body.password,
       name:body.name || '',
+      email: body.email,
+      password: body.password
     },
   });
 
