@@ -106,6 +106,7 @@ blogRouter.get("/bulk", async (c) => {
       content: true,
       title: true,
       id: true,
+      createdAt: true,
       author: {
         select: {
           name: true,
@@ -113,8 +114,20 @@ blogRouter.get("/bulk", async (c) => {
       },
     },
   });
+
+  const formattedBlog = blogs.map((blog) => ({
+    ...blog,
+    createdAt: new Date(blog.createdAt).toLocaleString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
+  }));
+  console.log(formattedBlog)
   return c.json({
-    blogs,
+    formattedBlog,
   });
 });
 
@@ -130,9 +143,10 @@ blogRouter.get("/:id", async (c) => {
         id: id,
       },
       select: {
-        id:true,
+        id: true,
         title: true,
         content: true,
+        createdAt:true,
         author: {
           select: {
             name: true,
@@ -140,8 +154,23 @@ blogRouter.get("/:id", async (c) => {
         },
       },
     });
+
+      // Check if blog is null
+      if (!blog) {
+        c.status(404);
+        return c.json({ message: "Blog post not found" });
+      }
     return c.json({
-      blog,
+      blog: {
+        ...blog,
+        createdAt: new Date(blog.createdAt).toLocaleString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+        }),
+      },
     });
   } catch (e) {
     c.status(411);
