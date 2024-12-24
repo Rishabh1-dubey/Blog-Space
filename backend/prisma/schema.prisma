@@ -29,4 +29,5 @@ model Post {
   author    User    @relation(fields: [authorId], references: [id])
   authorId  String
   thumbnail String?
+   createdAt DateTime @default(now()) // Automatically stores the creation timestamp
 }
