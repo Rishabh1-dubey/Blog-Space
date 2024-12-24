@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 interface BlogCardProps {
   id:string,
   authorName: string;
+  createdAt:string
   title: string;
   content: string;
-  publishedDate: string;
+  publishedDate?: string; // Optional if not all blogs have it
 
 }
 export const BlogCard = ({
@@ -13,7 +14,8 @@ id,
   authorName,
   title,
   content,
-  publishedDate,
+  createdAt,
+  publishedDate ,
 }: BlogCardProps) => {
   return <Link to={`/blog/${id}`}>
 
@@ -22,14 +24,17 @@ id,
         <div className="flex justify-center flex-col      ">
           <Avatar name={authorName.toUpperCase()} />
         </div>
-        <div className="font-serif pl-2  pt-2 p-2 ">
+        <div className="font-serif pl-2  pt-2 p-2  ">
           {authorName}
         </div>
           <div className="pl-2 font-thin text-slate-500 text-center pt-2">{publishedDate}</div>
+          <div className="pl-2 font-thin text-slate-500 text-center pt-2">{createdAt}</div>
+         
+          
       </div>
 
 
-      <div className=" text-xl  font-bold mt-2">{title}</div>
+      <div className=" text-xl   font-bold mt-2">{title}</div>
       <div className=" font-extralight mt-1">{content.slice(0, 100) + "..."}</div>
       <div className="font-thin pt-2">{`${Math.ceil(content.length / 100)} mint`}</div>
       

@@ -45,6 +45,7 @@ const Blogs = () => {
       </div>
     );
   }
+
   return (
     <div>
       <AppBar />
@@ -57,7 +58,8 @@ const Blogs = () => {
               authorName={blog.author.name || "Unknown"}
               title={blog.title}
               content={blog.content}
-              publishedDate={"22 Dec 2024"}
+              publishedDate={"23 Dec"}
+              createdAt={blog.createdAt}
             />
           ))}
         </div>

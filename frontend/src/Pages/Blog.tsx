@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useBlog } from "../hooks";
 import { SingleBlog } from "../components/SingleBlog";
+import SingleShimmer from "./SingleShimmer";
 
 export const Blog = () => {
   const { id } = useParams();
@@ -8,7 +9,7 @@ export const Blog = () => {
     id: id || " ",
   });
   if (loading || !blog) {
-    return <div>loading ........</div>;
+    return <div><SingleShimmer/></div>;
   }
   return (
     <div>
