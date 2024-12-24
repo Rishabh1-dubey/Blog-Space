@@ -10,6 +10,11 @@ export const SingleBlog = ({ blog }: { blog: Blog }) => {
    
     if(!blog)
         return <SingleShimmer/>
+    const currentDate = new Date().toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+    });
   return (
     <div>
     <AppBar />
@@ -20,7 +25,7 @@ export const SingleBlog = ({ blog }: { blog: Blog }) => {
                     {blog?.title}
                 </div>
                 <div className="text-slate-500 pt-2">
-                    10Nov 2024
+               Date: {currentDate}
                 </div>
                 <div className="pt-4">
                     {blog?.content}
