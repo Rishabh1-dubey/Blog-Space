@@ -57,7 +57,7 @@ const Blogs = () => {
               authorName={blog.author.name || "Unknown"}
               title={blog.title}
               content={blog.content}
-              publishedDate={"15 Nov 2024"}
+              publishedDate={"22 Dec 2024"}
             />
           ))}
         </div>
