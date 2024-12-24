@@ -24,17 +24,22 @@ userRouter.post("/signup", async (c) => {
     c.status(411);
     return c.json({ message: "Inputs not correct" });
   }
-  const user = await prisma.user.create({
-    data: {
-      name:body.name || '',
-      email: body.email,
-      password: body.password
-    },
-  });
 
-  //here you did for sign because sign is coming from hono/jwt
-  const token = await sign({ id: user.id }, c.env.JWT_SECRET);
-  return c.json({ jwt: token });
+  try {  
+    const user = await prisma.user.create({
+      data: {
+        email: body.email,
+        password: body.password,
+        name:body.name || ''
+      },
+    });
+    //here you did for sign because sign is coming from hono/jwt
+    const token = await sign({ id: user.id }, c.env.JWT_SECRET);
+    return c.json({ jwt: token });
+  } catch (error) {
+    console.log(error)
+  }
+
 });
 
 //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.zeyJpZCI6ImY2MWRhNGZmLWE1NzAtNDZjNC04ODU1LTg2OTI4ZTJkNGQ4YiJ9.EL546e-uh5RFaD6wRPvxjLlcsZorqMdy8rU9TV3HRII
