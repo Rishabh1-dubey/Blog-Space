@@ -1,16 +1,19 @@
 
+import { IoArrowBackOutline } from "react-icons/io5";
 import { Blog } from "../hooks";
 import AppBar from "../Pages/AppBar";
 import { Avatar } from "../Pages/BlogCard";
 import SingleShimmer from "../Pages/SingleShimmer";
+import { useNavigate } from "react-router-dom";
 
 
 
 export const SingleBlog = ({ blog }: { blog: Blog }) => {
    
+    const navigate = useNavigate()
     if(!blog)
         return <SingleShimmer/>
-    const currentDate = new Date().toLocaleDateString("en-US", {
+    const currentDate = new Date().toLocaleDateString("en-IN", {
         year: "numeric",
         month: "short",
         day: "numeric",
@@ -18,6 +21,8 @@ export const SingleBlog = ({ blog }: { blog: Blog }) => {
   return (
     <div>
     <AppBar />
+     <IoArrowBackOutline onClick={()=>navigate("/blogs")} className=" relative top-6 text-4xl ml-44  hover:text-gray-900 cursor-pointer text-gray-500"
+          />
     <div className="flex justify-center ">
         <div className="grid grid-cols-12 px-10 w-full pt-12 max-w-screen-xl">
             <div className="col-span-8">

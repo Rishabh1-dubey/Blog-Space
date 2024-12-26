@@ -26,8 +26,8 @@ export const useBlogs = () => {
         },
       })
       .then((response) => {
-        setBlogs(response.data.blogs);
-        // console.log(response.data);
+       console.log( setBlogs(response.data.formattedBlog));
+        console.log(response.data);
         setLoading(false);
       })
       .catch((error) => {
