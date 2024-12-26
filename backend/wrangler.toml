@@ -4,8 +4,8 @@ main = "src/index.ts"
 
 
 [vars]
-DATABASE_URL ="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiNzBiOWNlYTctNjQ5My00MmM1LTk4MjktODBiYWJlMWI5ZGMwIiwidGVuYW50X2lkIjoiYWJjNjUwOWNmMGNlZWFkNzk1ZWQwMzM0Mjg5MTczMzkyNDgzMTE0MGU2YzE3ZDk2NGQ5YjljMzU2ZWNmYjBlYiIsImludGVybmFsX3NlY3JldCI6IjE1ZjFkYmY5LWU5YmQtNGYzYS04ZGNlLWMyZTNiNDc5ZmZmNiJ9.qHHyS_8Czinv7d4wSlthONNQOeK35hRZbligVGTcF_4"
+DATABASE_URL =""
 
-JWT_SECRET="rishabhdubey"
+JWT_SECRET=""
 
 
