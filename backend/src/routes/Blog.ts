@@ -117,7 +117,8 @@ blogRouter.get("/bulk", async (c) => {
 
   const formattedBlog = blogs.map((blog) => ({
     ...blog,
-    createdAt: new Date(blog.createdAt).toLocaleString("en-US", {
+    createdAt: new Date(blog.createdAt).toLocaleString("en-IN", {
+       timeZone: "Asia/Kolkata",
       year: "numeric",
       month: "short",
       day: "numeric",
@@ -163,7 +164,8 @@ blogRouter.get("/:id", async (c) => {
     return c.json({
       blog: {
         ...blog,
-        createdAt: new Date(blog.createdAt).toLocaleString('en-US', {
+        createdAt: new Date(blog.createdAt).toLocaleString('en-IN', {
+          timeZone: "Asia/Kolkata",
           year: 'numeric',
           month: 'short',
           day: 'numeric',
