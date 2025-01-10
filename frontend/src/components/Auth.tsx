@@ -40,8 +40,8 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
         });
       navigate("/blogs");
       
-    } catch (error: any) {
-      console.error("Error:", error || error.message);
+    } catch (error :any) {
+      console.log("Error", error.response ||   error.message );
       toast.error('Invalid Credentials', {
         position: "top-center",
         autoClose: 3000,
@@ -52,9 +52,9 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
         progress: undefined,
         theme: "light",
         transition: Bounce,
-        });
-
+      });
     }
+
   }
   return (
     <div className=" w-screen grid  grid-cols-1 md:grid-cols-2">
